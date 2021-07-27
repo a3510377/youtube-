@@ -1,0 +1,11 @@
+<div>
+    <div class="commentUser"><img src="${i.avatar}" class="userIcon">
+        <h3 class="userName">${i.authorName}</h3>
+        <a aria-label="${time_string(new Date(i.time.up))}" class="time tip">
+            ${time_ago(i.time.send)}</a>
+        ${i.time.send !== i.time.up ? `<p class="edit">已編輯</p>` : ""}
+    </div>
+    <div>
+        <div class="content">${i.txtHtml}</div>
+    </div>
+</div>

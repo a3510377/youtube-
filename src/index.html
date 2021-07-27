@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<style>
+    input[type="text"] {
+        width: 35%;
+        height: 30px;
+    }
+
+    .sets {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sets * {
+        margin: 10px;
+    }
+
+    .output {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .output>div {
+        border-top-style: solid;
+        border-top-width: 1px;
+        margin-bottom: 5px;
+        padding: 10px;
+        width: 70%;
+        height: 50%;
+        margin: 10px;
+    }
+
+    .commentUser {
+        display: flex;
+        align-items: center;
+    }
+
+    .commentUser * {
+        margin: 5px;
+    }
+
+    .commentUser img {
+        border-radius: 50%;
+    }
+
+    .commentUser h3 {
+        font-size: 1em;
+    }
+
+    .content {
+        font-size: 15px;
+        margin-left: 20px;
+    }
+
+    .time {
+        font-size: 3px;
+        color: darkgrey;
+    }
+
+    [href] {
+        text-decoration: none;
+    }
+</style>
+
+<body>
+    <div class="sets">
+        <input type="text" name="url" placeholder="請輸入網址" />
+        <input type="text" name="startText" placeholder="開頭文字" />
+        <input type="text" name="endText" placeholder="結尾文字" />
+        <button class="button push">送出</button>
+    </div>
+    <div class="output"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script>
+        function time_ago(dateTimeStamp) { let diffValue = new Date().getTime() - new Date(dateTimeStamp); if (diffValue < 0) { return; } let minute = 1000 * 60; let hour = minute * 60; let day = hour * 24; let week = day * 7; let month = day * 30; let minC = diffValue / minute; let hourC = diffValue / hour; let dayC = diffValue / day; let weekC = diffValue / week; let monthC = diffValue / month; let yearC = diffValue / month / 12; let result; if (yearC >= 1) { return `${parseInt(yearC)} 年前`; } else if (monthC >= 1 && parseInt(monthC) <= 12) { return `${parseInt(monthC)} 個月前`; } else if (weekC >= 1 && parseInt(weekC) <= 4) { return `${parseInt(weekC)} 周前`; } else if (dayC >= 1 && parseInt(dayC) <= 7) { return `${parseInt(dayC)} 天前`; } else if (hourC >= 1 && parseInt(hourC) <= 24) { return `${parseInt(hourC)} 小時前`; } else if (minC >= 1 && parseInt(minC) <= 60) { return `${parseInt(minC)} 分鐘前`; } else if (diffValue >= 0 && diffValue <= minute) { return "剛剛"; } else { return result; } }
+        $(function () {
+            $(".push").on("click", function () {
+                let data = $(this).parent();
+
+                let url = data.find("input[name='url']");
+                let startText = data.find("input[name='url']");
+                let endText = data.find("input[name='url']");
+
+                if (url.val().match(/(http(s?):(\/\/|\\\\)www\.youtube\.com\/([=A-Za-z0-9-_&])*(watch\?v=([A-Za-z0-9-_])*))/g
+                ) !== null) {
+                    $.getJSON(`/api/comment?videoId=${url.val().match(/(watch\?v=([A-Za-z0-9-_]*))/)[0].substring(8)}`, function (data) {
+                        $(".output").html("");
+                        for (i of data) {
+                            $(".output").append(`<div><div class="commentUser"><img src="${i.avatar}" class="userIcon"><h3 class="userName">${i.authorName}</h3><p class="time">${time_ago(i.time.send)}</p></div><div><div class="content">${i.txtHtml}</div></div></div>`);
+                        }
+                    })
+                } else {
+                    url.css("border-color", "red");
+                    url.change(function () {
+                        $(this).css("border-color", "");
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
