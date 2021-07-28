@@ -4,7 +4,7 @@
 
 ## 目前進度
 
-- [ ] 隨機抓取略過以抓取對象
+- [x] 隨機抓取略過 以抓取新對象( 同用戶 || 同訊息
 - [x] 填寫 meta 標籤
 - [x] 添加網頁 icon
 - [x] 隨機抓取
@@ -15,14 +15,12 @@
 
 ## 前置設定
 
-請參考 `.env.example`
-於檔案中創建一個 `.env` 文件
-放入您的 Google Api Token
+請參考 `.env.example`，於檔案中創建一個 `.env` 文件，放入您的 Google Api Token
 
 ## 架設方法
 
 注意!!
-需先安裝環境: `node.js(npm \ node`
+需先安裝環境: `node.js(npm`
 
 windows 安裝方式 && 啟動方式:
 

@@ -3,6 +3,12 @@ input[type="text"] {
     height: 30px;
 }
 
+input[type="checkbox"],
+label[for] {
+    margin: 1px;
+    cursor: pointer;
+}
+
 .sets {
     display: flex;
     justify-content: center;

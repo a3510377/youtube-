@@ -17,11 +17,18 @@ express()
             ).then((req) => req.json()).then((data) => {
                 if ("error" in data) {
                     console.warn("error:", data.error.code, data.error.message)
+                    return res.json({
+                        "error": {
+                            "code": data.error.code,
+                            "msg": data.error.message
+                        }
+                    })
                 }
-                res.send(data.items.map(function (item) {
+                res.json(data.items.map(function (item) {
                     let msg = item.snippet.topLevelComment.snippet
                     return {
                         id: item.id,
+                        userId: msg.authorChannelId.value,
                         txtJs: msg.textOriginal,
                         txtHtml: msg.textDisplay,
                         authorName: msg.authorDisplayName,
