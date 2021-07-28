@@ -12,8 +12,9 @@ express()
     })
     .get("/api/comment", (req, res) => {
         if ("videoId" in req.query) {
+            console.log(process.env.upperLimit);
             fetch(
-                `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=500&order=time&videoId=${req.query.videoId}&key=${process.env.googleApiToken}`
+                `https://www.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=${process.env.upperLimit}&order=time&videoId=${req.query.videoId}&key=${process.env.googleApiToken}`
             ).then((req) => req.json()).then((data) => {
                 if ("error" in data) {
                     console.warn("error:", data.error.code, data.error.message)
