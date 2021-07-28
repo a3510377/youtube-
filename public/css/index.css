@@ -1,0 +1,67 @@
+input[type="text"] {
+    width: 35%;
+    height: 30px;
+}
+
+.sets {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sets * {
+    margin: 10px;
+}
+
+.output {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.output > div {
+    border-top-style: solid;
+    border-top-width: 1px;
+    margin-bottom: 5px;
+    padding: 10px;
+    width: 70%;
+    height: 50%;
+    margin: 10px;
+}
+
+.commentUser {
+    display: flex;
+    align-items: center;
+}
+
+.commentUser * {
+    margin: 5px;
+}
+
+.commentUser img {
+    border-radius: 50%;
+}
+
+.commentUser h3 {
+    font-size: 1em;
+}
+
+.content {
+    font-size: 15px;
+    margin-left: 20px;
+}
+
+.time {
+    font-size: 3px;
+    color: darkgrey;
+}
+
+[href] {
+    text-decoration: none;
+}
+
+.none {
+    display: none;
+}
